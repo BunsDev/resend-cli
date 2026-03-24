@@ -10,17 +10,20 @@ Send an email via the Resend API.
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
-| `--from <address>` | string | Yes | Sender address (must be on a verified domain) |
+| `--from <address>` | string | Yes (unless `--template`) | Sender address (must be on a verified domain) |
 | `--to <addresses...>` | string[] | Yes | Recipient(s), space-separated |
-| `--subject <subject>` | string | Yes | Email subject line |
-| `--text <text>` | string | One of text/html/html-file | Plain-text body |
-| `--html <html>` | string | One of text/html/html-file | HTML body |
-| `--html-file <path>` | string | One of text/html/html-file | Path to HTML file |
+| `--subject <subject>` | string | Yes (unless `--template`) | Email subject line |
+| `--text <text>` | string | One of text/html/file/template | Plain-text body |
+| `--text-file <path>` | string | One of text/html/file/template | Path to plain-text file (use `"-"` for stdin) |
+| `--html <html>` | string | One of text/html/file/template | HTML body |
+| `--html-file <path>` | string | One of text/html/file/template | Path to HTML file (use `"-"` for stdin) |
+| `--template <id>` | string | No | Template ID — replaces body/subject/from with template defaults |
+| `--var <key=value...>` | string[] | No | Template variables as key=value pairs (e.g. `--var name=John --var count=42`) |
 | `--cc <addresses...>` | string[] | No | CC recipients |
 | `--bcc <addresses...>` | string[] | No | BCC recipients |
 | `--reply-to <address>` | string | No | Reply-to address |
-| `--scheduled-at <datetime>` | string | No | Schedule for later (ISO 8601) |
-| `--attachment <paths...>` | string[] | No | File paths to attach |
+| `--scheduled-at <datetime>` | string | No | Schedule for later — ISO 8601 or natural language (e.g. `"in 1 hour"`, `"tomorrow at 9am ET"`) |
+| `--attachment <paths...>` | string[] | No | File paths to attach (not compatible with `--template`) |
 | `--headers <key=value...>` | string[] | No | Custom headers |
 | `--tags <name=value...>` | string[] | No | Email tags |
 | `--idempotency-key <key>` | string | No | Deduplicate request |
@@ -108,7 +111,7 @@ Update a scheduled email.
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
-| `--scheduled-at <datetime>` | string | Yes | New schedule (ISO 8601) |
+| `--scheduled-at <datetime>` | string | Yes | New schedule — ISO 8601 or natural language |
 
 **Output:** `{"object":"email","id":"..."}`
 

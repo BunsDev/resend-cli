@@ -20,9 +20,10 @@ Detailed flag specifications for `resend templates` commands.
 |------|------|----------|-------------|
 | `--name <name>` | string | Yes | Template name |
 | `--html <html>` | string | One of html/html-file | HTML body with `{{{VAR_NAME}}}` placeholders |
-| `--html-file <path>` | string | One of html/html-file | Path to HTML file |
+| `--html-file <path>` | string | One of html/html-file | Path to HTML file (use `"-"` for stdin) |
 | `--subject <subject>` | string | No | Email subject |
 | `--text <text>` | string | No | Plain-text body |
+| `--text-file <path>` | string | No | Path to plain-text file (use `"-"` for stdin) |
 | `--from <address>` | string | No | Sender address |
 | `--reply-to <address>` | string | No | Reply-to address |
 | `--alias <alias>` | string | No | Lookup alias |
@@ -42,7 +43,7 @@ Variable types: `string`, `number`
 
 **Argument:** `<id|alias>` — Template ID or alias
 
-Same optional flags as `create`. At least one required.
+Same optional flags as `create` (including `--text-file` and `--html-file` with stdin support). At least one required.
 
 ---
 
@@ -65,3 +66,11 @@ Same optional flags as `create`. At least one required.
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
 | `--yes` | boolean | Yes (non-interactive) | Skip confirmation |
+
+---
+
+## templates open
+
+Open a template (or the templates list) in the Resend dashboard.
+
+**Argument:** `[id]` — Template ID (omit to open the list)
